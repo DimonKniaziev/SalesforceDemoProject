@@ -1,0 +1,33 @@
+<aura:component access="global" controller="ParticipantsAdderController" implements="flexipage:availableForAllPageTypes,force:hasRecordId,force:lightningQuickActionWithoutHeader">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <aura:attribute name="trainings" type="List"/>
+        
+    <aura:attribute name="selectedTraining" type="String"/>
+    <aura:attribute name="newParticipantAmount" type="integer"/>    
+    
+    <div class="slds-col modal-header slds-modal__header">
+        <h2 class="title slds-text-heading--medium">Choose Training and Add Participants</h2>
+    </div>
+    
+    <div class="slds-col modal-body scrollable slds-p-around--medium" style="height: 170px; max-height: 170px; overflow-y: auto !important">
+        <div style="height: 85px;">         
+            <lightning:select aura:id="trainingSelector" label="Choose Training" required="true" value="{!v.selectedTraining}">
+                <option value="">Choose Training</option>
+                <aura:iteration items="{!v.trainings}" var="t">
+                    <option value="{!t.Name}" selected="{!t.Name == v.selectedTraining}"> {!t.Name}, {!t.Training_Course__r.Name}, max. participants quantity: {!t.Max_Participants_Quantity__c}, free places:{!t.Free_Places__c} </option>
+                </aura:iteration>               
+            </lightning:select>
+        </div>
+        <div style="height: 85px;"> 
+            <lightning:input aura:id="amountInput" type="number" min="1" step="1" label="Participants Amount" required="true" name="participantAmount" value="{!v.newParticipantAmount}"/>            
+        </div>
+            
+        
+    </div>
+
+    <div class="slds-col modal-footer slds-modal__footer">        
+        <lightning:button variant="brand" label="Cancel" onclick="{! c.cancelClick }" />      
+        <lightning:button variant="brand" label="Add Participants" onclick="{! c.addParticipants }" />
+    </div> 
+</aura:component>	

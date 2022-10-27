@@ -1,0 +1,25 @@
+<aura:component access="global" controller="CertificatesGeneratorController" implements="flexipage:availableForAllPageTypes,force:hasRecordId,force:lightningQuickActionWithoutHeader">
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <aura:attribute name="participants" type="List"/>
+    
+    <div class="slds-col modal-header slds-modal__header">
+        <h2 class="title slds-text-heading--medium">Check for Certificates and Attach Them</h2>
+    </div>
+    <div class="slds-col modal-body scrollable slds-p-around--medium" style="height: 350px; max-height: 350px; overflow-y: auto !important">
+        
+        <aura:iteration items="{!v.participants}" var="participant">
+            <div>
+            	<iframe src="{!participant}" width="100%" height="755px" frameborder="0px" scrolling="no"/>
+            </div>
+        </aura:iteration>
+       
+    </div>
+    <div class="slds-col modal-footer slds-modal__footer">        
+        <lightning:button variant="brand" label="Cancel" onclick="{! c.cancelClick }" />      
+        <lightning:button variant="brand" label="Generate" onclick="{! c.savePDF }" />
+    </div> 
+    
+        
+</aura:component>

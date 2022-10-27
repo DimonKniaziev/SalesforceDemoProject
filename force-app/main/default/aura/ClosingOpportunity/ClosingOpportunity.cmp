@@ -1,0 +1,72 @@
+<aura:component access="global" controller="ClosingOpportunityController" implements="flexipage:availableForAllPageTypes,force:hasRecordId,force:lightningQuickActionWithoutHeader">
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute type="List" name="ThisOpportunityContactRoles"/>
+    <aura:attribute type="List" name="ThisAccountContacts"/>    
+    <aura:attribute type="Integer" name="ThisTrainingMPQ"/>    
+    <aura:attribute type="List" name="ThisContactRolesIds"/>
+    <aura:attribute type="Integer" name="FreePlaces"/>
+    <aura:attribute type="List" name="SelectedContacts"/>
+    <aura:attribute type="List" name="ValidContacts"/>    
+    <aura:attribute type="boolean" name="HasFreePlaces" default="false"/>    
+    <aura:attribute type="boolean" name="statusWon" default="false"/>
+
+   
+    
+    <div class="slds-col modal-header slds-modal__header">
+        <h2 class="title slds-text-heading--medium">Close The Opportunity as Won or as Lost</h2>
+    </div>
+    <div class="slds-col modal-body scrollable slds-p-around--medium" style="height: 300px; max-height: 300px; overflow-y: auto !important">
+        
+        
+        
+        <lightning:select aura:id="statusSelector" label="Choose Status" required="true" value="{!v.statusWon}" onchange="{! c.checkStatus}">
+            <option value="">Status</option>
+            <option value="true">Closed Won</option>
+            <option value="false"> Closed Lost</option>
+        </lightning:select>
+        <aura:if isTrue="{!v.statusWon}">
+            
+            <div>
+                <br/>
+                <h3 class="title slds-text-heading--medium" style="text-align: center;">List of Contact Roles:</h3>
+                <br/>
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                    <thead>
+                        <tr class="slds-line-height_reset">
+                            <th>Contact</th> <th>Role</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <aura:iteration items="{!v.ThisOpportunityContactRoles}" var="cr">
+                        <tr class="slds-hint-parent">
+                            <td>{!cr.Contact.Name}</td> <td>{!cr.Role}</td>
+                        </tr>
+                    </aura:iteration> 
+                    </tbody>
+                </table> 
+                <aura:if isTrue="{!v.HasFreePlaces}">
+                    <br/>
+                    <h3 class="title slds-text-heading--medium" style="text-align: center;"> Free Places By The Account Contacts</h3>
+                    <aura:iteration items="{!v.SelectedContacts}" indexVar="index">
+                        <div data-index="{!index}">
+                        <lightning:select aura:id="{!'c'+index}" required="true" onchange="{! c.selectContact}" >
+                            <option value=""> Select Contact {!index}</option>
+                            <aura:iteration items="{!v.ThisAccountContacts}" var="ac">
+                                <option value="{!ac.Id}" >{!ac.Name}</option>
+                            </aura:iteration>
+                        </lightning:select>
+                        </div>
+                    </aura:iteration>
+                </aura:if>
+            </div>
+            
+        </aura:if>  
+    </div>
+
+
+    <div class="slds-col modal-footer slds-modal__footer">        
+        <lightning:button variant="brand" label="Cancel" onclick="{! c.cancelClick }" />      
+        <lightning:button variant="brand" label="Close Opportunity" onclick="{! c.closeOpportunity }" />
+    </div>
+</aura:component>	
