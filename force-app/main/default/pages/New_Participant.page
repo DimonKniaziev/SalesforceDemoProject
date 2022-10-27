@@ -1,0 +1,23 @@
+<apex:page standardController="Participant__c" >
+    <apex:form >
+
+        <apex:pageBlock title="New Participant" mode="edit">         
+
+ 
+
+            <apex:pageBlockSection >
+
+
+                <apex:inputField value="{!Participant__c.Contact__c}" required="true"/><br/>
+                <apex:inputField value="{!Participant__c.Opportunity_Name__c}"/><br/>
+                <apex:inputField value="{!Participant__c.Status__c}"/><br/>
+                <apex:inputField value="{!Participant__c.Certification_Number__c}"/><br/>
+                <apex:inputField value="{!Participant__c.GPA__c}"/><br/>
+                <apex:inputField value="{!Participant__c.Registration_Date_Time__c}" required="true"/><br/>
+                <apex:inputField value="{!Participant__c.Training__c}" required="true"/><br/>
+
+            </apex:pageBlockSection>
+   
+        </apex:pageBlock>   
+    </apex:form>
+</apex:page>

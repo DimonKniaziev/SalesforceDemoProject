@@ -1,0 +1,27 @@
+Hello {!Contact.LastName},
+
+soon you will take part in our seminar. 
+The course takes place on the following dates and times:
+
+from {!Training__c.Start_Date__c} until {!Training__c.End_Date__c}
+
+at the following location: 
+
+{!Training__c.Location__r.Email__c}, 
+{!Location__c.PLZ__c} {!Location__c.City__c}, 
+{!Location__c.Country__c}
+
+You may find more details about the location and how to get there on our website: {Company WebSite}
+
+Is there anything else we can assist you with? If you have any questions, please do not hesitate to e-mail us ({comapnyEmail}) or to call us ({!Organization.Phone}). We are happy to help you.
+
+We are very much looking forward to meeting you.
+
+Best Regards 
+from your team of {!Organization.Name}
+
+
+ph: {!Organization.Phone}
+fax:  {!Organization.Fax}
+Email: {CompanyEmail}
+{CompanySite}

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Send_Participants_List</name>
+        <label>Send Participants List</label>
+        <locationX>308</locationX>
+        <locationY>288</locationY>
+        <actionName>Training__c.Training_Participants_List</actionName>
+        <actionType>emailAlert</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <apiVersion>54.0</apiVersion>
+    <interviewLabel>Send Participants List {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Send Participants List</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <object>Training__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <scheduledPaths>
+            <name>X5_Days_Before_Training_Start</name>
+            <connector>
+                <targetReference>Send_Participants_List</targetReference>
+            </connector>
+            <label>5 Days Before Training Start</label>
+            <offsetNumber>-5</offsetNumber>
+            <offsetUnit>Days</offsetUnit>
+            <recordField>Start_Date__c</recordField>
+            <timeSource>RecordField</timeSource>
+        </scheduledPaths>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <textTemplates>
+        <name>test</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;&amp;lt;messaging:emailTemplate subject=&quot;Training&quot; recipientType=&quot;Contact&quot; relatedToType=&quot;Training__c&quot;&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;lt;messaging:plainTextEmailBody &amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;Hello!&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;There is 5 days until training Start&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;Check the List of Participants&lt;/p&gt;&lt;p&gt;&amp;lt;/messaging:plainTextEmailBody&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;lt;messaging:attachment renderAs=&quot;PDF&quot; filename=&quot;Participants&quot;&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&lt;/p&gt;&lt;p&gt;&amp;lt;/messaging:attachment&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;lt;/messaging:emailTemplate&amp;gt;{!$Record}&lt;/p&gt;</text>
+    </textTemplates>
+</Flow>

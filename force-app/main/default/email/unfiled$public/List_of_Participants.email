@@ -1,0 +1,19 @@
+<messaging:emailTemplate subject="Training" recipientType="Contact" relatedToType="Training__c">
+<messaging:plainTextEmailBody >
+    Hello!
+    There is 5 days until training Start   
+    Check the Details
+</messaging:plainTextEmailBody>
+    <messaging:attachment renderAs="PDF" filename="Participants">
+        <p>LOCATION: {!relatedTo.Location__r.Name}</p>
+        <apex:outputPanel rendered="{!relatedTo.Restaurant__c != null}">
+            <p>RESTAURANT: {!relatedTo.Restaurant__r.Name}</p>
+        </apex:outputPanel>
+        
+        
+        LIST OF PARTICIPANTS:<br/>
+        <apex:repeat var="p" value="{!relatedTo.Participants__r}">
+            {!p.Contact__r.Name}<br/>
+        </apex:repeat>
+    </messaging:attachment>
+</messaging:emailTemplate>

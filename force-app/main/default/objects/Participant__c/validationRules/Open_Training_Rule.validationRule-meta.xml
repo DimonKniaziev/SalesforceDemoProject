@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Open_Training_Rule</fullName>
+    <active>true</active>
+    <errorConditionFormula>NOT(ISPICKVAL( Training__r.Status__c , &apos;Active&apos;))</errorConditionFormula>
+    <errorDisplayField>Training__c</errorDisplayField>
+    <errorMessage>choosed training is not active</errorMessage>
+</ValidationRule>

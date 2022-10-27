@@ -1,0 +1,176 @@
+<apex:page showHeader="false" applyBodyTag="false" renderAs="pdf" standardController="Participant__c">
+    <head>
+        <style>
+            body {
+                font-family: Arial Unicode MS;
+                padding-top: 40px;                                            
+            }
+            body div{
+                text-align: center;                                        
+            }
+            h1, h2, h3, h4, h5, h6{
+                margin: 0px;
+            }
+            .certificate-preview{                
+                background-image: url("{!$Resource.certificate_background_picture}");                                                        
+                width: 565px;
+                height: 220px;
+                margin: auto;                                        
+            }
+            
+            .certificate-preview-text{
+                text-align: center;
+                font-weight: bold;                
+                padding-top: 55px;                
+                font-size: 75px;
+                font-family: SansSerif;
+                color: #424244;
+            }                        
+            .participant-name{                
+                margin-top: 15px;
+                font-size: 50px;            
+            }
+            .training-date{
+                margin-top: 30px;
+                font-size: 25px;
+            }
+            .training-name{
+                margin-top: 30px;
+                font-size: 40px;
+            } 
+            .training-location{
+                margin-top: 15px;
+                font-size: 25px;
+            }
+            .participant-GPA{
+                margin-top: 10px;
+                margin-bottom: 30px;
+                font-size: 25px;
+            }
+            .topics{
+                height: 180px;
+            }           
+            .topics div{
+                position: absolute;
+                color: #39393c;
+            }
+            .main-topics-container{
+                left: 35%;                
+            }
+            .main-topics{
+                left: 36%;
+                margin-top: 0px;
+                font-size: 15px;
+                font-weight: lighter;
+            }
+            .topics-line{
+                width: 3px;
+                height: 180px;
+                background-color: #24bdae;
+                left: 50%;
+            }
+            .topics-list{
+                left: 50%;
+                text-align: left;                
+            }
+            .topics-list-item{
+                margin-left: 30px;
+                margin-top: 0px;
+                font-size: 15px;
+                font-weight: lighter;            
+            }            
+            .cignature-container{                
+                height: 75px;
+                width: 170px;                          
+            }                        
+            .left-cignature-container{
+                position: absolute;
+                left: 17%;                
+            }
+            .right-cignature-container{
+                position: absolute;
+                left: 60%;
+            }
+            .cignature-underline{
+                
+                color: black;
+            }
+            .logo-container{
+                position: absolute;
+                width: 100%;
+                text-align: center;
+                top: 910px;
+            }
+            .left-cignature-container img{
+                margin-top: 35px;               
+            }
+            .right-cignature-container img{                
+                margin-top: 30px;
+            }
+            
+           
+        </style> 
+    </head>
+    <body>
+        <apex:variable var="TrainingStart" value="{!DAY(DATEVALUE(Participant__c.Training__r.Start_Date__c))}"/>
+        
+    
+    
+    
+        <div class="certificate-preview">
+            <h1 class="certificate-preview-text">Certificate</h1>                
+        </div>
+        <div>
+            <h2 class="participant-name"><apex:outputField value="{!Participant__c.Contact__r.Name}"/></h2>
+       
+            <h5 class="training-date">
+                from
+                &nbsp;<apex:outputText value="{!TrainingStart}">
+                </apex:outputText>. to  
+                &nbsp;<apex:outputText value="{0,date,dd'.'MM'.'yyyy}">
+                    <apex:param value="{!Participant__c.Training__r.End_Date__c}" /> 
+                </apex:outputText>
+            </h5>
+      
+            <h3 class="training-name"><apex:outputField value="{!Participant__c.Training__r.Training_course__r.Name}"/></h3>
+            <h5 class="training-location">
+                In &nbsp;<apex:outputField value="{!Participant__c.Training__r.Location__r.City__c}"/>
+            </h5>
+            <h4 class="participant-GPA"> GPA &nbsp;
+                <apex:outputText value="{0, number, integer}">
+                    <apex:param value="{!Participant__c.GPA__c}" />
+                </apex:outputText>
+            </h4>
+        </div>
+        <div class="topics">
+            <div class="main-topics-container"> 
+                <h6 class="main-topics">Main Topics</h6>       
+            </div>
+            <div class="topics-line"></div>
+            <div class="topics-list">
+                <h6 class="topics-list-item"><apex:outputField value="{!Participant__c.Training__r.Training_Course__r.Description__c}"/></h6>
+                      
+            </div>
+        </div>
+        <div class="certificate-footer">
+            <div class="left-cignature-container">                
+                <div class="cignature-container"><apex:image url="{!$Resource.certificate_left_cignature}" width="150px"/></div>
+                <hr class="cignature-underline"/>
+                <h6 class="cignaturer-name">Alexander Holl</h6>  
+            </div>
+            <div class="logo-container">
+                <apex:image url="{!$Resource.certificate_logo_image}" width="85px"/>
+            </div>   
+            <div class="right-cignature-container">
+                <div class="cignature-container"><apex:image url="{!$Resource.certificate_right_cignature}" width="100px"/></div>
+                <hr class="cignature-underline"/>
+                <h6 class="cignaturer-name">Mirko Lange</h6>  
+            </div>
+        </div>
+        
+        
+   
+    
+    
+    </body>
+</apex:page>

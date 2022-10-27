@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Training_Overfilled_Rule</fullName>
+    <active>false</active>
+    <errorConditionFormula>Training__r.Free_Places__c &lt;= 0</errorConditionFormula>
+    <errorDisplayField>Training__c</errorDisplayField>
+    <errorMessage>Choosed Training Overfilled, You Cant Add Participants</errorMessage>
+</ValidationRule>
